@@ -11,7 +11,14 @@ const AddUser = props => {
 
   const addUserHandler = (event) => {
     event.preventDefault();
-    console.log(enteredUserName, enteredAge)
+    if(enteredUserName.trim().length === 0 || enteredAge.trim().length === 0) {
+      return;
+    }
+    if(+enteredAge < 1) {
+      return;
+    }
+    //console.log(enteredUserName, enteredAge)
+    props.onAddUser(enteredUserName, enteredAge)
     setEnteredUserName('')
     setEnteredAge('')
   }
@@ -25,6 +32,7 @@ const AddUser = props => {
   }
 
   return(
+    <>
     <Card className={classes.input}>
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">Username</label>
@@ -34,6 +42,7 @@ const AddUser = props => {
         <Button type="submit">Add User</Button>
       </form>
     </Card>
+    </>
   )
 }
 
